@@ -1,3 +1,7 @@
+
+const $Captura = (elemento) =>  document.getElementById(elemento)
+    
+
 window.onload = function(){
     console.log("estamos llegando")
 
@@ -11,8 +15,16 @@ window.onload = function(){
 
 //------DESDE AQUÍ CONTINÚE CON LAS VALIDACIONES DEL FORMULARIO //
 //-------------------DE REGISTRO DE PELÍCULAS------------------//    
+    
+    $Captura('title').focus()
 
+    let vacio = $Captura(title).addEventListener('blur', function() {
+        if ($Captura(title).value == 0){
+        console.log("Aca tambien llega")}
+    }) 
 
+    
+    
 
 
 }
