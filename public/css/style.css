@@ -101,7 +101,7 @@ input, select{
 }
 
 .is-invalid {
-  border: 2px solid #842029;
+  color: #842029;
 }
 
 .alert-warning{

@@ -1,8 +1,8 @@
 
 const $getId = (elemento) =>  document.getElementById(elemento)
-    
 
-window.onload = function(){
+
+window.onload = async function(){
     console.log("estamos llegando")
 
     let titulo = document.querySelector('.moviesAddTitulo')
@@ -20,99 +20,149 @@ window.onload = function(){
     const elementForm = $getId('form').elements
 
     $getId('title').focus()
-
+                                                                    //Ok
     $getId('title').addEventListener('blur', function(){
-        if($getId('title').value.length < 1){
+        if(this.value.length < 1){
             errores.title = "El nombre es requerido"
-            $getId('title').classList.add('is-invalid')
-            console.log('estamos saliendo 1')
-        }
+            this.classList.add('is-invalid')
+            $getId('msg_title').innerHTML = errores.title
+        }else{
+            delete errores['title']
+            $getId('msg_title').innerHTML = ""
+            this.classList.remove('is-invalid')
+            this.classList.add('is-valid')
+        } 
     })
-
+                                                                    //Ok
     $getId('rating').addEventListener('blur', function(){
-        if($getId('rating').value.length < 1){
+        if(this.value.length < 1){
             errores.rating = "El rating es requerido"
-            $getId('rating').classList.add('is-invalid')
-            console.log('estamos saliendo 2')
-        }else if($getId('rating').value <0 || $getId('rating').value >10 ) {
-            console.log('estamos saliendo 2 bis')
-            $getId('rating').classList.remove('is-valid')
-            $getId('rating').classList.add('is-invalid')
+            this.classList.add('is-invalid')
+            $getId('msg_rating').innerHTML = errores.rating
+        }else if(this.value <0 || this.value >10 ) {
             errores.rating = "Debe ingresar valor entre 0 y 10"
+            $getId('msg_rating').innerHTML = errores.rating
+            this.classList.add('is-invalid')
         }else{
-            $getId('rating').classList.remove('is-invalid')
-            $getId('rating').classList.add('is-valid')
-            console.log('estamos saliendo 2 pero bien')
+            delete errores['rating']
+            $getId('msg_rating').innerHTML = ""
+            this.classList.remove('is-invalid')
+            this.classList.add('is-valid')
         } 
     })
 
-
+                                                                    //Ok
     $getId('awards').addEventListener('blur', function(){
-        if($getId('awards').value.length < 1){
+        if(this.value.length < 1){
             errores.awards = "El awards es requerido"
-            $getId('awards').classList.add('is-invalid')
-            console.log('estamos saliendo 3')
-        }else if($getId('awards').value <0 || $getId('awards').value >10 ) {
-            console.log('estamos saliendo 3 bis')
-            $getId('awards').classList.remove('is-valid')
-            $getId('awards').classList.add('is-invalid')
+            this.classList.add('is-invalid')
+            $getId('msg_awards').innerHTML = errores.awards
+        }else if(this.value <0 || this.value >10 ) {
             errores.awards = "Debe ingresar valor entre 0 y 10"
+            $getId('msg_awards').innerHTML = errores.awards
+            this.classList.add('is-invalid')
         }else{
-            $getId('awards').classList.remove('is-invalid')
-            $getId('awards').classList.add('is-valid')
-            console.log('estamos saliendo 3 pero bien')
+            delete errores['awards']
+            $getId('msg_awards').innerHTML = ""
+            this.classList.remove('is-invalid')
+            this.classList.add('is-valid')
         } 
     })
-    
+
+                                                                    //Ok
     $getId('release_date').addEventListener('blur', function(){
-        if($getId('release_date').value.length < 1){
+        if(this.value.length < 1){
             errores.release_date = "El release_date es requerido"
-            $getId('release_date').classList.add('is-invalid')
-            console.log('estamos saliendo 4')
+            this.classList.add('is-invalid')
+            $getId('msg_release_date').innerHTML = errores.release_date
+        }else{
+            delete errores['release_date']
+            $getId('msg_release_date').innerHTML = ""
+            this.classList.remove('is-invalid')
+            this.classList.add('is-valid')
         }
     })
-
+                                                                    //Ok
     $getId('length').addEventListener('blur', function(){
-        if($getId('length').value.length < 1){
+        if(this.value.length < 1){
             errores.length = "El length es requerido"
-            $getId('length').classList.add('is-invalid')
-            console.log('estamos saliendo 5')
-        }else if($getId('length').value <60 || $getId('length').value >360 ) {
-            console.log('estamos saliendo 5 bis')
-            $getId('length').classList.remove('is-valid')
-            $getId('length').classList.add('is-invalid')
+            this.classList.add('is-invalid')
+            $getId('msg_length').innerHTML = errores.length
+        }else if(this.value <60 || this.value >360 ) {
             errores.length = "Debe ingresar valor entre 60 y 360"
+            $getId('msg_length').innerHTML = errores.length            
+            this.classList.add('is-invalid')
         }else{
-            $getId('length').classList.remove('is-invalid')
-            $getId('length').classList.add('is-valid')
-            console.log('estamos saliendo 5 pero bien')
+            delete errores['length']
+            $getId('msg_length').innerHTML = ""
+            this.classList.remove('is-invalid')
+            this.classList.add('is-valid')
         } 
     })
-    
-    
+                                                                    //Ok
     $getId('genre_id').addEventListener('blur', function(){
-        if($getId('genre_id').value.length < 1){
-            errores.length = "El gernero es requerido"
-            $getId('genre_id').classList.add('is-invalid')
-            console.log('estamos saliendo 6')
+        if(this.value.length < 1){
+            errores.genre_id = "El gernero es requerido"
+            this.classList.add('is-invalid')
+            $getId('msg_genre_id').innerHTML = errores.genre_id
+        }else{
+            delete errores['genre_id']
+            $getId('msg_genre_id').innerHTML = ""
+            this.classList.remove('is-invalid')
+            this.classList.add('is-valid')
         }
     })
     
-    if(Object.keys(errores).length >= 1){
-            console.log('tenemos errores')
-        } else{
-            console.log('no hay errores')
-    } 
-
-
-    $getId('botonAgregar').addEventListener('click', function(event){
+    
+     $getId('botonAgregar').addEventListener('click', function(event){
         event.preventDefault()
        for (i=0; i < elementForm.length-1; i++ ){
             if (!elementForm[i].value){
                 elementForm[i].classList.add('is-invalid')
-            } else {
+                switch (i) {
+                    case 0:
+                        errores.title = "El nombre es requerido"
+                        $getId('msg_title').innerHTML = errores.title
+                        $getId('msg_title').classList.add('is-invalid')
+                        break;
+                    case 1:
+                        errores.rating = "El rating es requerido"
+                        $getId('msg_rating').innerHTML = errores.rating
+                        $getId('msg_rating').classList.add('is-invalid')
+                        break;
+                    case 2:
+                        errores.awards = "El award es requerido"
+                        $getId('msg_awards').innerHTML = errores.awards
+                        $getId('msg_awards').classList.add('is-invalid')
+                        break;
+                    case 3:
+                        errores.release_date = "El release date es requerido"
+                        $getId('msg_release_date').innerHTML = errores.release_date
+                        $getId('msg_release_date').classList.add('is-invalid')
+                        break;
+                    case 4:
+                        errores.length = "El length es requerido"
+                        $getId('msg_length').innerHTML = errores.length
+                        $getId('msg_length').classList.add('is-invalid')
+                        break;
+                    default:
+                        errores.genre_id = "El genero es requerido"
+                        $getId('msg_genre_id').innerHTML = errores.genre_id
+                        $getId('msg_genre_id').classList.add('is-invalid')
+                    break;
+                }
+            }else{
                 elementForm[i].classList.add('is-valid')
             }
        }
-    })
+
+       if(Object.keys(errores).length < 1){
+        console.log('no tenemos errores')
+        $getId('form').submit()
+       } else{
+        console.log(errores)        
+        console.log('hay errores')
+} 
+
+    }) 
 }
